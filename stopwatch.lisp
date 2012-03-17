@@ -14,7 +14,8 @@
 
 (defun stopwatch-start (kw)
   "Start a stopwatch designated by KW."
-  (setf (gethash kw *stopwatch-timing*) (get-accurate-time)))
+  (setf (gethash kw *stopwatch-timing*) (get-accurate-time))
+  (values))
 
 (defun stopwatch-read (kw)
   "Read a stopwatch designated by KW."
@@ -27,7 +28,8 @@
 
 (defun stopwatch-reset (kw)
   "Resets the stopwatch designated by KW. Equivalent to starting it."
-  (setf (gethash kw *stopwatch-timing*) (get-accurate-time)))
+  (setf (gethash kw *stopwatch-timing*) (get-accurate-time))
+  (values))
 
 (defmacro with-stopwatch (&body body)
   "Execute BODY, returning its value as well as the value of the watch."
