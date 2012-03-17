@@ -1,7 +1,9 @@
 === SOME DOCUMENTATION TO CL-STOPWATCH ===
+
 Copyright (c) 2012 Robert Smith
 
 See LICENSE for license details.
+
 
 == To Time Something ==
 
@@ -11,7 +13,7 @@ Use WITH-STOPWATCH to time something in milliseconds. For example:
 >   (sleep 5)
 >   'lol)
 
-Which results in two values, the first is the result of the
+which results in two values, the first is the result of the
 computation, the second is the number of milliseconds it took to
 compute, as shown:
 
@@ -47,7 +49,7 @@ Use PROGRESS-TASK to indicate progress to a stream. Example:
 >     (sleep 5))
 >   'ok-im-awake)
 
-Which results in the following getting output.
+which results in the following getting output.
 
 > ;;;  SLEEPY-TIME: Waiting to wake up...
 > just 5 more seconds...
@@ -66,11 +68,12 @@ level like the stopwatch functions. For example:
 >   (sleep 3)
 >   (progress-task-done :nap))
 
-Which results in:
+which results in:
 
 > ;;;  NAP: Taking a nap...
 > ;;;  NAP: Done. [3000.0 ms]
 > ; No value
+
 
 == To Time a Compiled Form ==
 
@@ -84,7 +87,6 @@ For example:
 >          'done))
 
 which outputs
-
 
 > Evaluation took:
 >   5.0000 seconds of real time
