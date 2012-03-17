@@ -1,0 +1,96 @@
+=== SOME DOCUMENTATION TO CL-STOPWATCH ===
+Copyright (c) 2011 Robert Smith
+
+See LICENSE for license details.
+
+== To Time Something ==
+
+Use WITH-STOPWATCH to time something in milliseconds. For example:
+
+> (with-stopwatch
+>   (sleep 5)
+>   'lol)
+
+Which results in two values, the first is the result of the
+computation, the second is the number of milliseconds it took to
+compute, as shown:
+
+> LOL
+> 5010
+
+If your code isn't simple enough to wrap with a WITH-STOPWATCH, you
+can use the lower level stopwatch functions. The following example
+should be self-explanatory.
+
+> * (stopwatch-start :race)
+> ; No value
+> * (stopwatch-read :race)
+> 10414
+> * (stopwatch-read :race)
+> 17387
+> * (stopwatch-reset :race)
+> ;; No Value
+> * (stopwatch-read :race)
+> 5507
+> * (stopwatch-stop :race)
+> 22128
+
+
+== To Indicate Progress ==
+
+Use PROGRESS-TASK to indicate progress to a stream. Example:
+
+> (progress-task :sleepy-time "Waiting to wake up"
+>   (sleep 5)
+>   (format t "just 5 more seconds...~%")
+>   (progress-task :snooze "Snoozing a little more"
+>     (sleep 5))
+>   'ok-im-awake)
+
+Which results in the following getting output.
+
+> ;;;  SLEEPY-TIME: Waiting to wake up...
+> just 5 more seconds...
+> ;;;    SNOOZE: Snoozing a little more...
+> ;;;    SNOOZE: Done. [4999.0 ms]
+> ;;;  SLEEPY-TIME: Done. [10017.0 ms]
+> OK-IM-AWAKE
+
+Note the nesting, and the increased indentation as a result.
+
+There are analogous functions for doing "progress tasks" at a low
+level like the stopwatch functions. For example:
+
+> (progn
+>   (progress-task-start :nap "Taking a nap")
+>   (sleep 3)
+>   (progress-task-done :nap))
+
+Which results in:
+
+> ;;;  NAP: Taking a nap...
+> ;;;  NAP: Done. [3000.0 ms]
+> ; No value
+
+== To Time a Compiled Form ==
+
+Suppose you have some code you want to benchmark, but you wish to
+benchmark it compiled. To guarantee it gets compiled, use TIME*.
+
+For example:
+
+> (time* (progn
+>          (sleep 5)
+>          'done))
+
+which outputs
+
+
+> Evaluation took:
+>   5.0000 seconds of real time
+>   0.000045 seconds of total run time (0.000025 user, 0.000020 system)
+>   0.00% CPU
+>   0 bytes consed
+>   
+> DONE
+
