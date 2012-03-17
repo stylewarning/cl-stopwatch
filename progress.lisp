@@ -5,6 +5,8 @@
 
 (in-package #:cl-stopwatch)
 
+(defparameter *progress-indent* 0)
+
 (defun progress-task-start (kw string &optional (stream *standard-output*))
   "Start a task designated by the keyword KW, with a comment STRING,
 and print an indication that the task has started and start a
