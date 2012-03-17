@@ -30,10 +30,10 @@
 
 (defmacro with-stopwatch (&body body)
   "Execute BODY, returning its value as well as the value of the watch."
-  (let ((kw (intern (gensym) :keyword))
+  (let ((kw     (gensym))
         (result (gensym)))
     `(progn
-       (stopwatch-start ,kw)
+       (stopwatch-start ',kw)
        (let ((,result (progn ,@body)))
          (values ,result
-                 (stopwatch-stop ,kw)))))) ;FIXME: delete the stopwatch
+                 (stopwatch-stop ',kw)))))) ;FIXME: delete the stopwatch
