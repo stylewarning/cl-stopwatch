@@ -7,7 +7,6 @@
   (:use #:cl)
   (:export
    ;; stopwatch.lisp
-   #:get-accurate-time
    #:stopwatch-start
    #:stopwatch-stop
    #:stopwatch-read

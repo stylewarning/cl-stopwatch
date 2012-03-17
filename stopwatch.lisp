@@ -9,7 +9,8 @@
 
 (defmacro get-accurate-time ()
   "Get the time in milliseconds, accurately."
-  '(floor (* 1000 (get-internal-real-time)) internal-time-units-per-second))
+  '(values (floor (* 1000 (get-internal-real-time))
+                  internal-time-units-per-second)))
 
 (defun stopwatch-start (kw)
   "Start a stopwatch designated by KW."
